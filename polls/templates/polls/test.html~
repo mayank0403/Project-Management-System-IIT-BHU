@@ -1,0 +1,4 @@
+<h1>Data retreival from Database</h1>
+{% for r in data %}
+{{ r }}
+{% endfor %}
