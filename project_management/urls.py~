@@ -1,0 +1,23 @@
+from django.conf.urls import url
+
+from . import views
+
+app_name = 'project_management'
+urlpatterns = [
+    #url(r'^$', views.index, name='index'),
+    url(r'^loginresultstudent/$', views.verifystudentlogin, name='verifystudentlogin'),
+    url(r'^loginresultemployee/$', views.verifyemployeelogin, name='verifyemployeelogin'),
+    url(r'^loginresultstudent/edit/$', views.verifystudentloginedit, name='verifystudentloginedit'),
+    url(r'^loginresultemployee/edit/$', views.verifyemployeeloginedit, name='verifyemployeeloginedit'),
+    url(r'^loginstudent/$', views.studentlogin, name='studentlogin'),
+    url(r'^loginstudent/$', views.employeelogin, name='employeelogin'),
+    url(r'^admin/$', views.adminlogin, name='adminlogin'),
+    url(r'^adminlogged/$', views.adminverify, name='adminlogged'),
+    url(r'^adminlogged/studentsignup/$', views.studentsignup, name='studentsignup'),
+    url(r'^adminlogged/studentsignupranged/$', views.studentsignupranged, name='studentsignupranged'),
+    url(r'^adminlogged/employeesignup/$', views.employeesignup, name='employeesignup'),
+    url(r'^adminlogged/createstudent/$', views.createstudentusers, name='createstudent'),
+    url(r'^adminlogged/createemployee/$', views.createemployeeusers, name='createemployee'),
+    url(r'^adminlogged/createstudentranged/$', views.createstudentusersranged, name='createstudentranged'),
+    url(r'^logout/$', views.userlogout, name='logout'),
+]

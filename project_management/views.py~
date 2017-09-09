@@ -1,0 +1,139 @@
+from django.shortcuts import get_object_or_404, render
+from django.views import generic
+from django.db import connection
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+
+def my_custom_sql(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM test")
+        row = cursor.fetchall()
+    row1 = [y for x in row for y in x]
+    row2 = [y for y in [x for x in row]]
+    return render(request, 'project_management/test.html',{'data':row1, 'data1':row2})
+
+def studentlogin(request):
+    return render(request, 'project_management/studentlogin.html')
+
+def employeelogin(request):
+    return render(request, 'project_management/employeelogin.html')
+
+def studentsignup(request):
+    return render(request, 'project_management/addstudent.html')
+
+def studentsignupranged(request):
+    return render(request, 'project_management/addstudentranged.html')
+
+def employeesignup(request):
+    return render(request, 'project_management/addemployee.html')
+
+def userlogout(request):
+    logout(request)
+    return HttpResponse("Logged out")
+
+def createstudentusers(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    with connection.cursor() as cursor:
+        cursor.execute("select count(*) from auth_user where username = %s", [username])
+        row = cursor.fetchall()
+    row1 = [y for x in row for y in x]
+    if(row1[0]==0):
+        User.objects.create_user(username, '', password)
+    else:
+        return HttpResponse("Choose new username, this username has been already taken!")
+    with connection.cursor() as cursor:
+	cursor.execute('insert into student values(%s, "Anonymous New User", 0.0, NULL, 0, aes_encrypt(%s, "cryptography"), "Computer Science and Engineering", NULL, 0, 0, NULL)', [username, password])
+    return HttpResponse("New User Created!")
+
+def createemployeeusers(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    with connection.cursor() as cursor:
+        cursor.execute("select count(*) from auth_user where username = %s", [username])
+        row = cursor.fetchall()
+    row1 = [y for x in row for y in x]
+    if(row1[0]==0):
+        User.objects.create_user(username, '', password)
+    else:
+        return HttpResponse("Choose new username, this username has been already taken!")
+    with connection.cursor() as cursor:
+	cursor.execute('insert into guide values(%s, "Anonymous New User", 4,aes_encrypt(%s, "cryptography"), "Computer Science and Engineering")', [username, password])
+    return HttpResponse("New User Created!")
+
+def createstudentusersranged(request):
+    begin = request.POST['start']
+    end = request.POST['end']
+    for i in range(int(begin), int(end)+1):
+        with connection.cursor() as cursor:
+            cursor.execute("select count(*) from auth_user where username = %s", [i])
+            row = cursor.fetchall()
+        row1 = [y for x in row for y in x]
+        if(row1[0]==0):
+            User.objects.create_user(i, '', str(i)+"123xyz")
+        else:
+            return HttpResponse("Choose new username, %s username has been already taken!", [i])
+        with connection.cursor() as cursor:
+	    cursor.execute('insert into student values(%s, "Anonymous New User", 0.0, NULL, 0, aes_encrypt(%s, "cryptography"), "Computer Science and Engineering", NULL, 0, 0, NULL)', [i, str(i)+"123xyz"])
+    return HttpResponse("New Users Created!")
+    
+def adminlogin(request):
+    return render(request, 'project_management/adminlogin.html')
+
+def adminverify(request):
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM admin WHERE username = %s and password = %s;', [request.POST['username'], request.POST['password']])
+	row = cursor.fetchall()
+    row1 = [y for x in row for y in x]
+    if(len(row1)>=1):
+	return render(request, 'project_management/admin.html')
+    else:
+	return HttpResponse("Wrong Admin Credentials!")
+#def createemployeeusers(request):
+
+def verifystudentloginedit(request):
+    if request.user.is_authenticated:
+        with connection.cursor() as cursor:
+	    # change password in auth_user as well
+            cursor.execute('update student set name = %s, password = aes_encrypt(%s, %s), cgpa = %s, proj_topic_ideas = %s, dept_name = %s where rollno = %s',[request.POST['name'], request.POST['password'], "cryptography",  request.POST['cgpa'], request.POST['ideas'], request.POST['dept'], request.user.username])
+        return HttpResponse("Details updated sucessfully.")
+    else:
+        return render(request, 'project_management/studentlogin.html')
+
+def verifystudentlogin(request):
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM student WHERE rollno = %s and aes_decrypt(password, %s) = %s;', [request.POST['username'], "cryptography", request.POST['password']])        
+	row = cursor.fetchall()
+    row1 = [y for x in row for y in x]
+    if(len(row1)>1):
+	user = authenticate(username=request.POST['username'], password=request.POST['password'])
+        login(request, user)
+        maps = {'Roll Number':row1[0], 'Name':row1[1], 'CGPA':row1[2], 'Project Ideas':row1[3], 'Allocation Flag':row1[4], 'Department Name':row1[6], 'Project ID(if allocated)':row1[7], 'Attendance':row1[8], 'Maximum Attendance':row1[9], 'Next Meet Date':row1[10]}
+	return render(request, 'project_management/studentdetail.html',{'data':row1,'map':maps})
+    else:
+	return HttpResponse("Either username or password is incorrect.")
+
+def verifyemployeelogin(request):
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM guide WHERE id = %s and aes_decrypt(password, %s) = %s;', [request.POST['username'], "cryptography", request.POST['password']])        
+	row = cursor.fetchall()
+    row1 = [y for x in row for y in x]
+    if(len(row1)>1):
+	user = authenticate(username=request.POST['username'], password=request.POST['password'])
+        login(request, user)
+        maps = {'Guide ID':row1[0], 'Name':row1[1], 'Seats Left':row1[2], 'Department':row1[4]}
+	return render(request, 'project_management/employeedetail.html',{'data':row1,'map':maps})
+    else:
+	return HttpResponse("Either username or password is incorrect.")
+
+def verifyemployeeloginedit(request):
+    if request.user.is_authenticated:
+        with connection.cursor() as cursor:
+	    # change password in auth_user as well
+            cursor.execute('update guide set name = %s, password = aes_encrypt(%s, %s), seats_left = 4, dept_name = %s where id = %s',[request.POST['name'], request.POST['password'], request.POST['dept'], request.POST['dept'], request.user.username])
+        return HttpResponse("Details updated sucessfully.")
+    else:
+        return render(request, 'project_management/studentlogin.html')
