@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align="center"> Student Archives </h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}</h3>
+{% endif %}
+<form action="{% url 'project_management:changeallocation' %}" method="post">
+{% csrf_token %}
+Select Students:<br>
+{% if data1 %}
+{% for i in data1 %}
+{% for j, k in i.items %}
+{{j}} : {{k}}<br>
+<input type="radio" name="choice{{k}}" value="Lock" /> Lock</input>
+<input type="radio" name="choice{{k}}" value="Free" /> Free</input>
+<input type="radio" name="choice{{k}}" value="Wait" /> Wait</input><br>
+{% endfor %}<br><hr><br>
+{% endfor %}
+<input type="submit" value="Submit Choices" />
+</form>
+{% endif %}
+<br>Info : <br>
+{% if data2 %}
+{% for i in data2 %}
+{% for j, k in i.items %}
+{{j}} : {{k}}<br>
+{% endfor %}
+<br><hr><br>
+{% endfor %}
+{% endif %}

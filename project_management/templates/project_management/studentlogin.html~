@@ -1,13 +1,14 @@
-{% load static %}
-
-<!DOCTYPE html>
-<link rel="stylesheet" href="{% static "css/main.css" %}" />
-<h1>Data retreival from Database</h1>
-{% for i, j in map.items %}
-<li>
-{{ i }} : {{j}}
-{% endfor %}
+<h1>Student Login Page</h1>
+<form action="{% url 'project_management:verifystudentlogin' %}" method="post">
+{% csrf_token %}
+Username/UniqueID:
+<input type="text" name="username" value="" />
+<br>Password:
+<input type="password" name="password" value="" />
 <br>
+
+<input type="submit" value="Log in" />
+</form>
 <form action="{% url 'project_management:verifystudentloginedit' %}" method="post">
 {% csrf_token %}
 Username/UniqueID:
@@ -29,3 +30,4 @@ Department Name:
 <br>
 <input type="submit" value="Apply changes" />
 </form>
+

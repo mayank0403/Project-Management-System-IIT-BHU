@@ -1,0 +1,9 @@
+<h1>Admin Login Page</h1>
+<form action="{% url 'project_management:adminverify' %}" method="post">
+{% csrf_token %}
+Username:
+<input type="text" name="username" value="" />
+<br>Password:
+<input type="password" name="password" value="" />
+<input type="submit" value="Log in" />
+</form>

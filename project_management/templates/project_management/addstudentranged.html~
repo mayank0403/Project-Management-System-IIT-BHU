@@ -1,0 +1,10 @@
+<h1 align = "center">Ranged Student Signup Page</h1>
+<form action="{% url 'project_management:createstudentranged' %}" method="post">
+{% csrf_token %}
+Username(Starting position):
+<input type="text" name="start" value="" />
+<br>
+Username(Ending position):
+<input type="text" name="end" value="" />
+<input type="submit" value="Create users" />
+</form>

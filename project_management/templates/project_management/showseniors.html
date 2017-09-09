@@ -1,0 +1,15 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align = "center">Seniors' Archives</h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}<h3>
+{% endif %}
+{% for i in data1 %}
+{% for j, k in i.items %}
+{{j}} : {{k}}<br>
+{% endfor %}
+<br><hr><br>
+{% endfor %}

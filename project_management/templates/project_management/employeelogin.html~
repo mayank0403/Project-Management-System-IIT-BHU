@@ -1,0 +1,12 @@
+<h1>Employee Login Page</h1>
+<form action="{% url 'project_management:verifyemployeelogin' %}" method="post">
+{% csrf_token %}
+Username/UniqueID:
+<input type="text" name="username" value="" />
+<br>Password:
+<input type="password" name="password" value="" />
+<br>
+
+<input type="submit" value="Log in" />
+</form>
+

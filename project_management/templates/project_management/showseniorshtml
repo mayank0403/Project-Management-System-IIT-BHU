@@ -1,0 +1,5 @@
+<h1 align = "center">Add Document Details Page</h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}<h3>
+{% endif %}

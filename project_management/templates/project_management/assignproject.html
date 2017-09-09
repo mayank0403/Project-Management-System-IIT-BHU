@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align="center"> Create and assign Projects </h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}</h3>
+{% endif %}
+<form action="{% url 'project_management:assignedproject' %}" method="post">
+{% csrf_token %}
+Projects can only be assigned to the following roll numbers:<br>
+{% for i in data1 %}
+{{i}}
+{% endfor %}<br>
+Student Roll:<br>
+<input required type="text" name="roll" value="" />
+<br>
+Project Topic:<br>
+<input required type="text" name="topic" value="" />
+<br>
+Project Credits:<br>
+<input required type="number" name="credits" value="" />
+<input type="submit" value="Submit" />
+</form>

@@ -1,0 +1,10 @@
+<h1>Student Signup Page</h1>
+<form action="{% url 'project_management:createstudent' %}" method="post">
+{% csrf_token %}
+Username(Roll Number):
+<input type="text" name="username" value="" />
+<br>
+Password:
+<input type="password" name="password" value="" />
+<input type="submit" value="Create user" />
+</form>

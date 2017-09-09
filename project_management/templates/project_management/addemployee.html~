@@ -1,0 +1,9 @@
+<h1>Employee Signup Page</h1>
+<form action="{% url 'project_management:createemployee' %}" method="post">
+{% csrf_token %}
+Username(Employee ID):<br>
+<input type="text" name="username" value="" />
+Password:<br>
+<input type="password" name="password" value="" />
+<br><input type="submit" value="Create user" />
+</form>

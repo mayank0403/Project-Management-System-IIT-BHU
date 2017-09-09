@@ -1,0 +1,6 @@
+<h1>Data retreival from Database</h1>
+{% for i, j in map.items %}
+<li>
+{{ i }} : {{j}}
+{% endfor %}
+<br>

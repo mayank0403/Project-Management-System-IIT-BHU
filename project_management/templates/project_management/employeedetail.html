@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align="center">Employee Data retreival from Database</h1>
+<div align="right"><h4><a href = "{% url 'project_management:logout' %}"> Log out </a></h4></div>
+<div align="left"><h4><a href = "{% url 'project_management:prefinfo' %}"> Show Preference Info </a></h4></div>
+<div align="center"><h4><a href = "{% url 'project_management:assignproject' %}"> Create and Assign Projects </a></h4></div>
+<br>
+<div align="right"><h4><a href = "{% url 'project_management:fillproject' %}"> Fill and Update Project Info </a></h4></div>
+<div align="left"><h4><a href = "{% url 'project_management:assigngrades' %}"> Assign grades </a></h4></div>
+<div align="center"><h4><a href = "{% url 'project_management:attend' %}"> Attendance and Next-Meet Maintenance </a></h4></div>
+<br>
+<div align="right"><h4><a href = "{% url 'project_management:changecheckpoint' %}"> Mark Checkpoint</a></h4></div>
+<div align="left"><h4><a href = "{% url 'project_management:projectdetailsemployee' %}"> See Project Details</a></h4></div>
+<br>
+<div align="center"><h4><a href = "{% url 'project_management:updateinterestsguide' %}"> Update Interests</a></h4></div>
+<div align="right"><h4><a href = "{% url 'project_management:updatepub' %}"> Update Publications</a></h4></div>
+{% if data %}
+<h3 align="center">{{data}}<h3>
+{% endif %}
+<br>
+{% for i, j in map.items %}
+<li>
+{{ i }} : {{j}}
+{% endfor %}
+<br>
+<form action="{% url 'project_management:verifyemployeeloginedit' %}" method="post">
+{% csrf_token %}
+<h3 align = "center">Update Employee Details</h3>
+Name:
+<input required type="text" name="name" value="" />
+<br>New Password:
+<input required type="password" name="password" value="" />
+<br>
+Department Name:
+<input required type="text" name="dept" value="" />
+<br>
+<input type="submit" value="Apply changes" />
+</form>
+

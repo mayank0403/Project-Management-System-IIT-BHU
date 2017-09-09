@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align="center">Student Data retreival from Database</h1>
+<div align="right"><h4><a href = "{% url 'project_management:logout' %}"> Log out </a></h4></div>
+<div align="left"><h4><a href = "{% url 'project_management:fillpreference' %}"> Add preferences </a></h4></div>
+<br>
+<div align="center"><h4><a href = "{% url 'project_management:adddoc' %}"> Add Document Info </a></h4></div>
+<div align="right"><h4><a href = "{% url 'project_management:seesen' %}"> See data of seniors</a></h4></div>
+<div align="left"><h4><a href = "{% url 'project_management:seeprojectdetails' %}"> See Project Details</a></h4></div>
+<br>
+<div align="center"><h4><a href = "{% url 'project_management:markcheckpoint' %}"> Mark Checkpoint</a></h4></div>
+<div align="right"><h4><a href = "{% url 'project_management:finalgradesstudent' %}"> See Final Grades</a></h4></div>
+<br>
+<div align="left"><h4><a href = "{% url 'project_management:updateinterests' %}"> Update Interests</a></h4></div>
+<div align="center"><h4><a href = "{% url 'project_management:updateprojects' %}"> Update Past Projects</a></h4></div>
+{% if data %}
+<h3 align="center">{{data}}<h3>
+{% endif %}
+<br>
+{% for i, j in map.items %}
+<li>
+{{ i }} : {{j}}
+{% endfor %}
+<br>
+<form action="{% url 'project_management:verifystudentloginedit' %}" method="post">
+{% csrf_token %}
+<h3 align = "center">Update Student Details</h3>
+Name:
+<input required type="text" name="name" value="" />
+<br>New Password:
+<input required type="password" name="password" value="" />
+<br>
+Project Ideas:
+<input required type="text" name="ideas" value="" />
+<br>
+CGPA:
+<input required type="number" step="0.1" name="cgpa" value="" />
+<br>
+Department Name:
+<input required type="text" name="dept" value="" />
+<br>
+<input type="submit" value="Apply changes" />
+</form>
+

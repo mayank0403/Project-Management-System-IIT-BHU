@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align = "center">Checkpoint Updation Page</h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}<h3>
+{% endif %}
+{% if data1 %}
+Checkpoints can only be changed for the following projects:<br>
+{% for i in data1 %}
+{{i}}
+{% endfor %}
+{% endif %}
+<form action="{% url 'project_management:changedcheckpoint' %}" method="post">
+{% csrf_token %}
+Project ID:
+<input required type="text" name="pid" value="" />
+<br>
+Changed Checkpoint:
+<input required type="text" name="cp" value="" />
+<br>
+<input type="submit" value="Update Checkpoint" />
+</form>

@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1>Employee Signup Page</h1>
+{% if data %}
+<h3 align="center">{{data}}<h3>
+{% endif %}
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+<form action="{% url 'project_management:createemployee' %}" method="post">
+{% csrf_token %}
+Username(Employee ID):<br>
+<input required type="text" name="username" value="" />
+<br>Password:<br>
+<input required type="password" name="password" value="" />
+<br><input type="submit" value="Create user" />
+</form>

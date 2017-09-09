@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align="center"> Add Preferences </h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+<div align="right"><h2><a href = "{% url 'project_management:showprofessordetails' %}"> Show Professor Details </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}</h3>
+{% endif %}
+<br>Professors : <br>
+{% if data2 %}
+{% for i in data2 %}
+{% for j, k in i.items %}
+{{j}} : {{k}}<br>
+{% endfor %}
+<br><hr><br>
+{% endfor %}
+{% endif %}
+<form action="{% url 'project_management:addpreference' %}" method="post">
+{% csrf_token %}
+Preference 1:
+<input required type="text" name="username1" value="" />
+<br>
+Preference 2:
+<input required type="text" name="username2" value="" />
+<br>
+Preference 3:
+<input required type="text" name="username3" value="" />
+<br>
+Preference 4:
+<input required type="text" name="username4" value="" />
+<br>
+<input type="submit" value="Submit preferences" />
+</form>

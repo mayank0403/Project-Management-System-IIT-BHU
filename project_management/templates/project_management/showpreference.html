@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align="center"> Showing Preferences </h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+<div align="right"><h2><a href = "{% url 'project_management:showprofessordetails' %}"> Show Professor Details </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}</h3>
+{% endif %}
+<br>Professors : <br>
+{% if map %}
+{% for i, j in map.items %}
+<h5>{{i}} : {{j}}<h5>
+{% endfor %}
+{% endif %}

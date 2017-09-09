@@ -1,0 +1,13 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<img height=100px src="{% static "images/iit.png" %}" alt="IIT-BHU Logo" />
+<h1 align="center"> Home page for Project Management System </h1>
+{% if data %}
+<h3 align="center" class="background">{{data}}<h3>
+{% endif %}
+<h4><a href={% url 'project_management:adminlogin' %}>Admin Login Page</a></h4>
+<h4><a href={% url 'project_management:studentlogin' %}>Student Login Page</a></h4>
+<h4><a href={% url 'project_management:employeelogin' %}>Guide Login Page</a></h4><br><hr>
+This is the steam project management system developed as a part of Database Management System Project1. This system has been developed by Mayank, Roll number - 14075033, Computer Science and Engineering student part-III.

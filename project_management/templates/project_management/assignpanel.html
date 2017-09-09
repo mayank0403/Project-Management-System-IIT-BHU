@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align = "center">Panel Updation Page</h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}<h3>
+{% endif %}
+<form action="{% url 'project_management:assignedpanel' %}" method="post">
+{% csrf_token %}
+Panel ID:
+<input required type="text" name="pid" value="" />
+<br>
+Project ID:
+<input required type="text" name="prid" value="" />
+<br>
+<input required type="submit" value="Assign Panel" />
+</form>
+<h2 align="center">For previously assigned projects only:</h2><br>
+<form action="{% url 'project_management:assignedpanelgrades' %}" method="post">
+{% csrf_token %}
+Panel ID:
+<input required type="text" name="pid" value="" />
+<br>
+Project ID:
+<input required type="text" name="prid" value="" />
+<br>
+Grade:
+<select name="grade" required>
+	<option value="A">A</option>
+	<option value="A-">A-</option>
+	<option value="B">B</option>
+	<option value="B-">B-</option>
+	<option value="C">C</option>
+	<option value="C-">C-</option>
+	<option value="D">D</option>
+	<option value="D-">D-</option>
+	<option value="E">E</option>
+	<option value="E-">E-</option>
+	<option value="F">F</option>
+</select><br>
+<input type="submit" value="Update Project Panel" />
+</form>
+<br><hr>
+Panel IDs available:<br>
+{% for i in data2 %}
+{% for j, k in i.items %}
+{{j}} : {{k}}<br>
+{% endfor %}
+{% endfor %}
+<br><hr>
+Project IDs available:<br>
+{% for i in data4 %}
+{% for j, k in i.items %}
+{{j}} : {{k}}<br>
+{% endfor %}
+{% endfor %}
+
+<br><hr>
+<h2 align="center" color=green>Member Archives available</h2><br>
+{% for i in data3 %}
+{% for j, k in i.items %}
+{{j}} : {{k}}<br>
+{% endfor %}<br><hr><br>
+{% endfor %}

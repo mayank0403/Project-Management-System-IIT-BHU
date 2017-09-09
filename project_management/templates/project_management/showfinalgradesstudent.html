@@ -1,0 +1,13 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align = "center">Checkpoint Updation Page</h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}<h3>
+{% endif %}
+{% if data1 %}
+The Final Grade is :<br>
+{{data1}}
+{% endif %}

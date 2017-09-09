@@ -1,0 +1,7 @@
+<h1 align="center">Admin Page</h1>
+<br>
+<a href="{% url 'project_management:studentsignup' %}"> Add new student user </a>
+<br>
+<a href="{% url 'project_management:studentsignup' %}"> Add ranged student users </a>
+<br>
+<a href="{% url 'project_management:employeesignup' %}"> Add new employee user </a>

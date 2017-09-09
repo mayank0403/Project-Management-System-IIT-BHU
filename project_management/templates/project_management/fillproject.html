@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static "css/main.css" %}" />
+<h1 align="center"> Fill Project Info </h1>
+<div align="right"><h2><a href = "{% url 'project_management:logout' %}"> Log out </a></h2></div>
+{% if data %}
+<h3 align="center">{{data}}</h3>
+{% endif %}
+<form action="{% url 'project_management:filledproject' %}" method="post">
+{% csrf_token %}
+Projects can only be filled for the following project IDs:<br>
+{% for i in data1 %}
+{{i}}
+{% endfor %}<br>
+Project ID:<br>
+<input required type="text" name="project_id" value="" />
+<br>
+Checkpoint:<br>
+<input required type="text" name="checkpoint" value="" />
+<br>
+Deadline:<br>
+<input type="date" min = {{d}} name="deadline" value="" />
+<br>
+<input type="submit" value="Submit" />
+</form>
