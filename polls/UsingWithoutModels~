@@ -1,0 +1,7 @@
+>>> from django.db import connection
+>>> cursor = connection.cursor()
+>>> cursor.execute("select * from test");
+2L
+>>> cursor.fetchall()
+((u'Mayank', 33L), (u'Hemanshu', 30L))
+
