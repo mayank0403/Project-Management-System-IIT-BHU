@@ -5,7 +5,7 @@ The project serves the purpose of making the tedious tasks of grade assignment, 
 
 --------
 
-Open readme.pdf and Requirements.pdf for more information.
+Open readme.pdf and Requirements.pdf for more detailed information.
 
 ### Project Setup
 1. Start Server Through python:
