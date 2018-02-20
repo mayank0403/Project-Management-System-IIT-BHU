@@ -3,6 +3,8 @@ This project is a online project management system for undergraduate and graduat
 
 The project serves the purpose of making the tedious tasks of grade assignment, attendance, advisor assignment, student preferences for advisor and project online to speed up the initial and continuous process of interaction that happens between a typical student-advisor relationship.
 
+NOTE - If you need the dbdump file to run this project on your system, then send me an email.
+
 --------
 
 Open readme.pdf and Requirements.pdf for more information.
