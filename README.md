@@ -1,5 +1,5 @@
 # Project Management System IIT BHU
-This project is a online project management system for undergraduate and graduate students and their supervisors. It is Django Framework in Python and RDBMS is built in MySQL.
+This project is a online project management system for undergraduate and graduate students and their supervisors. It is Django Framework in Python and RDBMS is built in MySQL
 
 The project serves the purpose of making the tedious tasks of grade assignment, attendance, advisor assignment, student preferences for advisor and project online to speed up the initial and continuous process of interaction that happens between a typical student-advisor relationship.
 
@@ -7,7 +7,7 @@ NOTE - If you need the dbdump file to run this project on your system, then send
 
 --------
 
-Open readme.pdf and Requirements.pdf for more information.
+Open readme.pdf and Requirements.pdf for more detailed information.
 
 ### Project Setup
 1. Start Server Through python:
