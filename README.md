@@ -30,6 +30,6 @@ The details of the project are as follows:
 
 * **MySQL Server** Version: *5.7.13-0ubuntu0.16.04.2*
 
-##### In case of any doubt visit stackoverflow.
-
 * **MySQL-python** version : *1.2.5*
+
+##### (In case of any doubt visit stackoverflow)
